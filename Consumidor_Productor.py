@@ -2,7 +2,8 @@ import logging
 import threading
 import time
 
-logging.basicConfig(level=logging.DEBUG, format='(%(threadName)-2s) %(message)s')
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s (%(threadName)-2s) %(message)s')
 
 class Consumir(object):
     def __init__(self, start=0):
@@ -17,7 +18,7 @@ class Consumir(object):
                 self.condicionElementoMAX.wait()
             else:
                 self.elemento += 1
-                logging.debug("Elemento creado, elemento=%s", self.elemento)
+                logging.debug("Elemento creado, total de elementos=%s", self.elemento)
 
         with self.condicionElemetoMIN:
             if self.elemento >= 5:
@@ -30,7 +31,7 @@ class Consumir(object):
                 logging.debug("Esperando elementos")
                 self.condicionElemetoMIN.wait()
             self.elemento -= 5
-            logging.debug("Elementos consumidos, elemento=%s", self.elemento)
+            logging.debug("Elementos consumidos, total de elementos=%s", self.elemento)
 
         with self.condicionElementoMAX:
             logging.debug("Hay espacio para producir nuevos elementos")

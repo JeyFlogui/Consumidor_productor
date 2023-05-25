@@ -21,16 +21,16 @@ class Consumir(object):
                 logging.debug("Elemento creado, total de elementos=%s", self.elemento)
 
         with self.condicionElemetoMIN:
-            if self.elemento >= 5:
+            if self.elemento >= 10:
                 logging.debug("Existen suficientes elementos para consumir")
                 self.condicionElemetoMIN.notify()
 
     def decrementarElemento(self):
         with self.condicionElemetoMIN:
-            while not self.elemento >= 5:
+            while not self.elemento >= 10:
                 logging.debug("Esperando elementos")
                 self.condicionElemetoMIN.wait()
-            self.elemento -= 5
+            self.elemento -= 10
             logging.debug("Elementos consumidos, total de elementos=%s", self.elemento)
 
         with self.condicionElementoMAX:
